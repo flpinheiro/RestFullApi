@@ -8,9 +8,8 @@ builder.Services.AddOpenApiDocument(options =>
         document.Info = new NSwag.OpenApiInfo
         {
             Version = "v1",
-            Title = "To do List Api"
+            Title = "Weather Forecast Api"
         };
-
     };
 });
 

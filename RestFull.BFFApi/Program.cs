@@ -1,29 +1,24 @@
-using Microsoft.OpenApi.Models;
-using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-builder.Services.AddOcelot(builder.Configuration);
-builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddControllers();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "TODO Gateway API",
-        Version = "v1",
-    });
-});
+builder.Services.AddOcelotService(builder.Configuration);
+builder.Services.AddSwaggerService(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseSwaggerForOcelotUI(opt =>
+app.UseHttpsRedirection();
+
+if (app.Environment.IsDevelopment())
 {
-    opt.PathToSwaggerGenerator = "/swagger/docs";//https://localhost:7100/swagger/v1/swagger.json
-});
+    app.UseDeveloperExceptionPage();
+    app.UseSwaggerMiddlare();
+}
 
 await app.UseOcelot();
+
+app.MapControllers();
 
 app.Run();

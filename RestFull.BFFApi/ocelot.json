@@ -20,10 +20,15 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
-      "SwaggerKey": "weather"
+      "SwaggerKey": "weather",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Region": "europe-central",
+        "Header": "OC-Caching-Control",
+        "EnableContentHashing": false // my route has GET verb only, assigning 'true' for requests with body: POST, PUT etc.
+      }
     }
   ],
-
   "SwaggerEndPoints": [
     {
       "Key": "weather",

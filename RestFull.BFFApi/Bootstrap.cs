@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 
 internal static class Bootstrap
@@ -38,6 +39,7 @@ internal static class Bootstrap
     internal static void AddOcelotService(this IServiceCollection services, ConfigurationManager configuration)
     {
         configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-        services.AddOcelot(configuration);
+        services.AddOcelot(configuration)
+            .AddCacheManager(x => x.WithDictionaryHandle());
     }
 }

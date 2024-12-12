@@ -27,6 +27,31 @@
         "Header": "OC-Caching-Control",
         "EnableContentHashing": false // my route has GET verb only, assigning 'true' for requests with body: POST, PUT etc.
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7200
+        },
+        {
+          "Host": "localhost",
+          "Port": 5200
+        }
+      ],
+      "UpstreamPathTemplate": "/admin/{everything}",
+      "UpstreamHttpMethod": [
+        "POST", "PUT", "PATCH"
+      ],
+      "SwaggerKey": "command",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Region": "europe-central",
+        "Header": "OC-Caching-Control",
+        "EnableContentHashing": false // my route has GET verb only, assigning 'true' for requests with body: POST, PUT etc.
+      }
     }
   ],
   "SwaggerEndPoints": [
@@ -37,6 +62,16 @@
           "Name": "Weather API",
           "Version": "v1",
           "Url": "https://localhost:7100/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "command",
+      "Config": [
+        {
+          "Name": "command API",
+          "Version": "v1",
+          "Url": "https://localhost:7200/swagger/v1/swagger.json"
         }
       ]
     }

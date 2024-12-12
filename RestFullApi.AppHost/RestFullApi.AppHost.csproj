@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
 
@@ -14,10 +14,14 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RestFull.BFFApi\RestFull.BFFApi.csproj" />
+    <ProjectReference Include="..\RestFull.CommandApi\RestFull.CommandApi.csproj" />
+    <ProjectReference Include="..\RestFullApi.Domain.Infra.MigrationService\RestFullApi.Domain.Infra.MigrationService.csproj" />
+    <ProjectReference Include="..\RestFullApi.ServiceDefaults\RestFullApi.ServiceDefaults.csproj" />
     <ProjectReference Include="..\RestFullApi.WebApi\RestFullApi.WebApi.csproj" />
     <ProjectReference Include="..\RestFullApi.Web\RestFullApi.Web.csproj" />
   </ItemGroup>

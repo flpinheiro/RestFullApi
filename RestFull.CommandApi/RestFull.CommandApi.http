@@ -1,0 +1,6 @@
+@RestFull.CommandApi_HostAddress = http://localhost:5036
+
+GET {{RestFull.CommandApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
-namespace RestFull.CommandService.Commands;
+namespace RestFull.Domain.Core.Commands;
 
-public class AddProductCommand: IRequest<Guid>
+public class AddProductCommand : IRequest<Guid>
 {
     public string Name { get; init; } = null!;
 
@@ -21,5 +20,5 @@ public class UpdateProductCommand : AddProductCommand, IRequest
     public Guid Id { get; init; }
 }
 
-public record DeleteProductCommand(Guid id): IRequest;
-public record RateProductCommand(Guid Id, int Rate): IRequest;
+public record DeleteProductCommand(Guid id) : IRequest;
+public record RateProductCommand(Guid Id, int Rate) : IRequest;

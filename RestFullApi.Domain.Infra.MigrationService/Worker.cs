@@ -23,7 +23,7 @@ public class Worker(
         try
         {
             using var scope = serviceProvider.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<CommandDbContext>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
             await EnsureDatabaseAsync(dbContext, cancellationToken);
             await RunMigrationAsync(dbContext, cancellationToken);
@@ -38,7 +38,7 @@ public class Worker(
         hostApplicationLifetime.StopApplication();
     }
 
-    private static async Task EnsureDatabaseAsync(CommandDbContext dbContext, CancellationToken cancellationToken)
+    private static async Task EnsureDatabaseAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
         var dbCreator = dbContext.GetService<IRelationalDatabaseCreator>();
 
@@ -54,7 +54,7 @@ public class Worker(
         });
     }
 
-    private static async Task RunMigrationAsync(CommandDbContext dbContext, CancellationToken cancellationToken)
+    private static async Task RunMigrationAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async () =>
@@ -66,7 +66,7 @@ public class Worker(
         });
     }
 
-    private static async Task SeedDataAsync(CommandDbContext dbContext, CancellationToken cancellationToken)
+    private static async Task SeedDataAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
         //SupportTicket firstTicket = new()
         //{

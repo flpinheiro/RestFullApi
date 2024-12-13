@@ -11,7 +11,7 @@ using RestFull.Domain.Infra.Contexts;
 
 namespace RestFull.Domain.Infra.Migrations
 {
-    [DbContext(typeof(CommandDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20241212014750_MigrationName")]
     partial class MigrationName
     {

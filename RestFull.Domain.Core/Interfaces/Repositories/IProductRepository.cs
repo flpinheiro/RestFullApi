@@ -1,21 +1,17 @@
-﻿using RestFull.Domain.Core.Dtos;
-using RestFull.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RestFull.Domain.Core.Entities;
+using RestFull.Domain.Core.Queries;
 
 namespace RestFull.Domain.Core.Interfaces.Repositories;
 
-public interface IProductRepository
+public interface IProductRepository: IDisposable
 {
-    Task<Guid> Add(Product product, CancellationToken cancellationToken);
-    Task Update(Product product, CancellationToken cancellationToken);
+    void Add(Product product, CancellationToken cancellationToken);
+    void Update(Product product, CancellationToken cancellationToken);
     Task Delete(Guid id, CancellationToken cancellationToken);
     //Task Rate(Guid id, int rate, CancellationToken cancellationToken);
 
     Task<Product> Get(Guid id, CancellationToken cancellationToken);
-    Task<IEnumerable<Product>> GetAll(CancellationToken cancellationToken);
-    Task<IEnumerable<Product>> GetPaginated(PaginatedQueryDto query, CancellationToken cancellationToken);
+    Task<IEnumerable<Product>> Get(PaginatedQuery request, CancellationToken cancellationToken);
+
+    void Save();
 }

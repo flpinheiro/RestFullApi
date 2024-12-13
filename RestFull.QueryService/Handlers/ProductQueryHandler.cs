@@ -1,19 +1,14 @@
 ﻿using MediatR;
 using RestFull.Domain.Core.Entities;
-using RestFull.QueryService.Queries;
+using RestFull.Domain.Core.Interfaces;
+using RestFull.Domain.Core.Queries;
 
 namespace RestFull.QueryService.Handlers;
 
-public sealed class ProductQueryHandler : IRequestHandler<ProductByIdQuery, Product>,
+public sealed class ProductQueryHandler(IUnitOfWork unit) : IRequestHandler<ProductByIdQuery, Product>,
     IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>
 {
-    Task<Product> IRequestHandler<ProductByIdQuery, Product>.Handle(ProductByIdQuery request, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+    Task<Product> IRequestHandler<ProductByIdQuery, Product>.Handle(ProductByIdQuery request, CancellationToken cancellationToken) => unit.ProductRepository.Get(request.Id, cancellationToken);
 
-    Task<IEnumerable<Product>> IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>.Handle(ProductPaginatedQuery request, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+    Task<IEnumerable<Product>> IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>.Handle(ProductPaginatedQuery request, CancellationToken cancellationToken) => unit.ProductRepository.Get(request, cancellationToken);
 }

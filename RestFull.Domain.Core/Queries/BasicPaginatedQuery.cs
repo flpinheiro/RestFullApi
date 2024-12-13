@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RestFull.Domain.Core.Dtos;
+namespace RestFull.Domain.Core.Queries;
 
-public class BasicPaginatedQueryDto
+public class BasicPaginatedQuery
 {
     [FromQuery(Name = "page")]
     public int Page { get; set; }
@@ -10,7 +10,7 @@ public class BasicPaginatedQueryDto
     public int Take { get; set; }
 }
 
-public class PaginatedQueryDto : BasicPaginatedQueryDto
+public class PaginatedQuery : BasicPaginatedQuery
 {
     [FromQuery(Name = "query")]
     public string? Query { get; set; }

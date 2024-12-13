@@ -10,7 +10,7 @@ using RestFull.Domain.Infra.Contexts;
 
 namespace RestFull.Domain.Infra.Migrations
 {
-    [DbContext(typeof(CommandDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class CommandDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

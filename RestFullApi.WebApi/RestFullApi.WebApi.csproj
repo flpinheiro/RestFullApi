@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RestFull.Domain.Core\RestFull.Domain.Core.csproj" />
+    <ProjectReference Include="..\RestFull.Domain.Infra\RestFull.Domain.Infra.csproj" />
     <ProjectReference Include="..\RestFull.QueryService\RestFull.QueryService.csproj" />
   </ItemGroup>
 

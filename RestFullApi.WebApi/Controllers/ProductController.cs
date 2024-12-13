@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RestFull.Domain.Core.Entities;
-using RestFull.QueryService.Queries;
+using RestFull.Domain.Core.Queries;
 
 namespace RestFullApi.WebApi.Controllers;
 

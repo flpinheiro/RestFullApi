@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RestFull.CommandService.Commands;
+using RestFull.Domain.Core.Commands;
 
 namespace RestFull.CommandApi.Controllers;
 

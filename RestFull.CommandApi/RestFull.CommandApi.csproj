@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestFull.CommandService\RestFull.CommandService.csproj" />
     <ProjectReference Include="..\RestFull.Domain.Infra\RestFull.Domain.Infra.csproj" />
     <ProjectReference Include="..\RestFullApi.ServiceDefaults\RestFullApi.ServiceDefaults.csproj" />
   </ItemGroup>

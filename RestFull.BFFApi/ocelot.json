@@ -43,7 +43,7 @@
       ],
       "UpstreamPathTemplate": "/admin/{everything}",
       "UpstreamHttpMethod": [
-        "POST", "PUT", "PATCH"
+        "POST", "PUT", "PATCH", "DELETE"
       ],
       "SwaggerKey": "command",
       "FileCacheOptions": {

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RestFull.Domain.Core\RestFull.Domain.Core.csproj" />
+    <ProjectReference Include="..\RestFullApi.ServiceDefaults\RestFullApi.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

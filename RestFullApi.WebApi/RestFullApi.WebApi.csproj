@@ -11,4 +11,9 @@
     <PackageReference Include="NSwag.AspNetCore" Version="14.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestFull.Domain.Core\RestFull.Domain.Core.csproj" />
+    <ProjectReference Include="..\RestFull.QueryService\RestFull.QueryService.csproj" />
+  </ItemGroup>
+
 </Project>

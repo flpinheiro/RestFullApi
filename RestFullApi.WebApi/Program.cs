@@ -1,3 +1,5 @@
+using RestFull.QueryService.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -12,6 +14,8 @@ builder.Services.AddOpenApiDocument(options =>
         };
     };
 });
+
+builder.Services.AddQueryServices();
 
 var app = builder.Build();
 

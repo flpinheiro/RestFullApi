@@ -1,26 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using RestFull.Domain.Infra.Contexts;
+using RestFull.CommandService.Configurations;
+using RestFull.Domain.Infra.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-
-builder.AddSqlServerDbContext<CommandDbContext>(connectionName: "database");
-
-//builder.Services.AddDbContextPool<CommandDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("database"), sqlOptions =>
-//    {
-//        // Workaround for https://github.com/dotnet/aspire/issues/1023
-//        //sqlOptions.ExecutionStrategy(c => new RetryingSqlServerRetryingExecutionStrategy(c));
-//        sqlOptions.MigrationsAssembly("RestFull.Domain.Infra.MigrationWorker");
-//    }));
-
-builder.EnrichSqlServerDbContext<CommandDbContext>();
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApiDocument(options =>
 {
     options.PostProcess = document =>
@@ -32,6 +17,14 @@ builder.Services.AddOpenApiDocument(options =>
         };
     };
 });
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+builder.Services.AddCommandServices();
+
+builder.AddRepositoryService();
 
 var app = builder.Build();
 
@@ -52,3 +45,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

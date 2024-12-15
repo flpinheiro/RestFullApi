@@ -11,7 +11,10 @@ var migrations = builder.AddProject<Projects.RestFullApi_Domain_Infra_MigrationS
     .WithReference(sql)
     .WaitFor(sql);
 
-var apiService = builder.AddProject<Projects.RestFullApi_WebApi>("apiservice");
+var apiService = builder.AddProject<Projects.RestFullApi_WebApi>("apiservice")
+    .WithReference(sql)
+    .WaitFor(sql)
+    .WaitForCompletion(migrations);
 
 var commandApi = builder.AddProject<Projects.RestFull_CommandApi>("restfull-commandapi")
     .WithReference(sql)

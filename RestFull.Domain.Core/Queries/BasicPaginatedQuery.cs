@@ -5,9 +5,9 @@ namespace RestFull.Domain.Core.Queries;
 public class BasicPaginatedQuery
 {
     [FromQuery(Name = "page")]
-    public int Page { get; set; }
+    public int Page { get; set; } = 1;
     [FromQuery(Name = "offset")]
-    public int Take { get; set; }
+    public int Take { get; set; } = 10;
 }
 
 public class PaginatedQuery : BasicPaginatedQuery

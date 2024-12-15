@@ -11,8 +11,6 @@ public static class RepositoryServiceRegistration
     public static void AddRepositoryService(this WebApplicationBuilder builder)
     {
         builder.AddSqlServerDbContext<ApplicationDbContext>(connectionName: "database");
-        builder.EnrichSqlServerDbContext<ApplicationDbContext>();
-
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

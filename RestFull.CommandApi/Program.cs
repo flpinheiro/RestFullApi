@@ -13,7 +13,7 @@ builder.Services.AddOpenApiDocument(options =>
         document.Info = new NSwag.OpenApiInfo
         {
             Version = "v1",
-            Title = "Weather Forecast Api"
+            Title = "Command Api"
         };
     };
 });
@@ -30,7 +30,6 @@ var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

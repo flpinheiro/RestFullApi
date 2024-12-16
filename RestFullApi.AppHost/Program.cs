@@ -1,40 +1,40 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var cache = builder.AddRedis("cache");
+var redis = builder.AddRedis("redis");
 
-var sql = builder.AddSqlServer("sql")
+var sqlServer = builder.AddSqlServer("sqlServer")
                 .WithDataVolume()
                 .WithLifetime(ContainerLifetime.Persistent)
                 .AddDatabase("database");
 
-var migrations = builder.AddProject<Projects.RestFullApi_Domain_Infra_MigrationService>("migrations")
-    .WithReference(sql)
-    .WaitFor(sql);
+var migrationervice = builder.AddProject<Projects.RestFullApi_Domain_Infra_MigrationService>("migrationervice")
+                        .WithReference(sqlServer)
+                        .WaitFor(sqlServer);
 
-var apiService = builder.AddProject<Projects.RestFullApi_WebApi>("apiservice")
-    .WithReference(sql)
-    .WaitFor(sql)
-    .WaitForCompletion(migrations);
+var queryApiService = builder.AddProject<Projects.RestFullApi_WebApi>("queryApiService")
+                        .WithReference(sqlServer)
+                        .WaitFor(sqlServer)
+                        .WaitForCompletion(migrationervice);
 
-var commandApi = builder.AddProject<Projects.RestFull_CommandApi>("restfull-commandapi")
-    .WithReference(sql)
-    .WaitFor(sql)
-    .WaitForCompletion(migrations);
+var commandApiService = builder.AddProject<Projects.RestFull_CommandApi>("commandApiService")
+                        .WithReference(sqlServer)
+                        .WaitFor(sqlServer)
+                        .WaitForCompletion(migrationervice);
 
-var bffApiService = builder.AddProject<Projects.RestFull_BFFApi>("bff")
-    .WithExternalHttpEndpoints()
-    .WithReference(cache)
-    .WaitFor(cache)
-    .WithReference(apiService)
-    .WaitFor(apiService)
-    .WithReference(commandApi)
-    .WaitFor(commandApi);
+var bffApiService = builder.AddProject<Projects.RestFull_BFFApi>("bffApiService")
+                    .WithExternalHttpEndpoints()
+                    .WithReference(redis)
+                    .WaitFor(redis)
+                    .WithReference(queryApiService)
+                    .WaitFor(queryApiService)
+                    .WithReference(commandApiService)
+                    .WaitFor(commandApiService);
 
-builder.AddProject<Projects.RestFullApi_Web>("webapi")
-    .WithExternalHttpEndpoints()
-    .WithReference(cache)
-    .WaitFor(cache)
-    .WithReference(bffApiService)
-    .WaitFor(apiService);
+builder.AddProject<Projects.RestFullApi_Web>("webapp")
+        .WithExternalHttpEndpoints()
+        .WithReference(redis)
+        .WaitFor(redis)
+        .WithReference(bffApiService)
+        .WaitFor(bffApiService);
 
 builder.Build().Run();

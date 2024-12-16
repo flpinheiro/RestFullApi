@@ -20,12 +20,12 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
-      "SwaggerKey": "weather",
+      "SwaggerKey": "query",
       "FileCacheOptions": {
         "TtlSeconds": 15,
         "Region": "europe-central",
         "Header": "OC-Caching-Control",
-        "EnableContentHashing": false // my route has GET verb only, assigning 'true' for requests with body: POST, PUT etc.
+        "EnableContentHashing": false 
       }
     },
     {
@@ -50,16 +50,16 @@
         "TtlSeconds": 15,
         "Region": "europe-central",
         "Header": "OC-Caching-Control",
-        "EnableContentHashing": false // my route has GET verb only, assigning 'true' for requests with body: POST, PUT etc.
+        "EnableContentHashing": false
       }
     }
   ],
   "SwaggerEndPoints": [
     {
-      "Key": "weather",
+      "Key": "query",
       "Config": [
         {
-          "Name": "Weather API",
+          "Name": "Query API",
           "Version": "v1",
           "Url": "https://localhost:7100/swagger/v1/swagger.json"
         }
@@ -69,7 +69,7 @@
       "Key": "command",
       "Config": [
         {
-          "Name": "command API",
+          "Name": "Command API",
           "Version": "v1",
           "Url": "https://localhost:7200/swagger/v1/swagger.json"
         }

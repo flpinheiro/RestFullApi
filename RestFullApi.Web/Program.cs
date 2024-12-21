@@ -1,22 +1,29 @@
-using RestFullApi.Web;
+using MudBlazor.Services;
 using RestFullApi.Web.Components;
+using RestFullApi.Web.Services;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
 builder.AddRedisOutputCache("cache");
+builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client =>
-    {
-        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-        client.BaseAddress = new("https+http://bff");
-    });
+builder.Services
+    .AddRefitClient<IBFFApiService>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https+http://bffApiService"));
+
+//builder.Services.AddHttpClient<WeatherApiClient>(client =>
+//    {
+//        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+//        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+//        client.BaseAddress = new("https+http://bff");
+//    });
 
 var app = builder.Build();
 

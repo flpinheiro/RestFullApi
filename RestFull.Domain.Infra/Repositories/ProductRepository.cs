@@ -13,19 +13,14 @@ internal class ProductRepository(ApplicationDbContext Context) : IProductReposit
         Context.Products.Add(product);
     }
 
-    public async Task Delete(Guid id, CancellationToken cancellationToken)
+    public void Delete(Product product)
     {
-        var product = await Context.Products.FirstOrDefaultAsync(p => p.Id == id);
-        if (product is null) throw new NotImplementedException();
-
         Context.Products.Remove(product);
     }
 
+    public Task<Product?> GetAsync(Guid id, CancellationToken cancellationToken) => Context.Products.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
 
-    public Task<Product?> Get(Guid id, CancellationToken cancellationToken) => Context.Products.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
-
-
-    public async Task<IEnumerable<Product>> Get(PaginatedQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Product>> GetAsync(PaginatedQuery request, CancellationToken cancellationToken)
     {
         var query = Context.Products.AsQueryable();
 
@@ -39,30 +34,4 @@ internal class ProductRepository(ApplicationDbContext Context) : IProductReposit
     {
         Context.Entry(product).State = EntityState.Modified;
     }
-
-    public void Save()
-    {
-        Context.SaveChanges();
-    }
-
-    private bool disposed = false;
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposed)
-        {
-            if (disposing)
-            {
-                Context.Dispose();
-            }
-        }
-        disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
 }

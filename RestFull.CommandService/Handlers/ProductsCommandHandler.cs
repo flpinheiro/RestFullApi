@@ -9,7 +9,14 @@ public sealed class ProductsCommandHandler(IUnitOfWork unit) : IRequestHandler<U
 {
     async Task IRequestHandler<UpdateProductCommand>.Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await unit.ProductRepository.Get(request.Id, cancellationToken);
+        var product = await unit.ProductRepository.GetAsync(request.Id, cancellationToken);
+        
+        if(product is null) 
+        {
+            //TODO IMPLEMENT
+            throw new NotImplementedException(); 
+        }
+
         product.Name = request.Name;
         product.Description = request.Description;
         product.Price = request.Price;
@@ -36,17 +43,24 @@ public sealed class ProductsCommandHandler(IUnitOfWork unit) : IRequestHandler<U
 
         await unit.SaveAsync();
 
-        return product.Id ?? throw new NotImplementedException();
+        return product.Id ?? Guid.Empty;
     }
 
     async Task IRequestHandler<DeleteProductCommand>.Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
-        await unit.ProductRepository.Delete(request.id, cancellationToken);
+        var product = await unit.ProductRepository.GetAsync(request.id, cancellationToken);
+        if(product is null ) 
+        {
+            //TODO IMPLEMENT
+            throw new NotImplementedException(); 
+        }
+        unit.ProductRepository.Delete(product);
         await unit.SaveAsync();
     }
 
     Task IRequestHandler<RateProductCommand>.Handle(RateProductCommand request, CancellationToken cancellationToken)
     {
+        //TODO IMPLEMENT
         throw new NotImplementedException();
     }
 }

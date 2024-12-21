@@ -2,7 +2,7 @@
 
 namespace RestFull.Domain.Core.Queries;
 
-public class BasicPaginatedQuery
+public abstract class BasicPaginatedQuery
 {
     [FromQuery(Name = "page")]
     public int Page { get; set; } = 1;
@@ -10,7 +10,7 @@ public class BasicPaginatedQuery
     public int Take { get; set; } = 10;
 }
 
-public class PaginatedQuery : BasicPaginatedQuery
+public abstract class PaginatedQuery : BasicPaginatedQuery
 {
     [FromQuery(Name = "query")]
     public string? Query { get; set; }

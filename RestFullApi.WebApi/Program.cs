@@ -1,3 +1,4 @@
+using RestFull.Domain.Core.Middlewares;
 using RestFull.Domain.Infra.Configurations;
 using RestFull.QueryService.Configurations;
 
@@ -28,6 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseOpenApi();
     app.UseSwaggerUi();
+}
+else
+{ 
+    app.UseGlobalException(); 
 }
 
 app.UseAuthorization();

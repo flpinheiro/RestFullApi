@@ -24,4 +24,25 @@ public class UnitOfWork(ApplicationDbContext Context) : IUnitOfWork
     {
         await Context.SaveChangesAsync();
     }
+
+    private bool disposed = false;
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                Context.Dispose();
+                _productRepository = null;
+            }
+        }
+        disposed = true;
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 }

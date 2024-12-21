@@ -1,4 +1,5 @@
 using RestFull.CommandService.Configurations;
+using RestFull.Domain.Core.Middlewares;
 using RestFull.Domain.Infra.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,10 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseOpenApi();
     app.UseSwaggerUi();
+}
+else
+{
+    app.UseGlobalException();
 }
 
 app.UseHttpsRedirection();

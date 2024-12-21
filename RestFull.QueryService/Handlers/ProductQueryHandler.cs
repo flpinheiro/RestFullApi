@@ -8,7 +8,7 @@ namespace RestFull.QueryService.Handlers;
 public sealed class ProductQueryHandler(IUnitOfWork unit) : IRequestHandler<ProductByIdQuery, Product>,
     IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>
 {
-    Task<Product> IRequestHandler<ProductByIdQuery, Product>.Handle(ProductByIdQuery request, CancellationToken cancellationToken) => unit.ProductRepository.Get(request.Id, cancellationToken);
+    Task<Product> IRequestHandler<ProductByIdQuery, Product>.Handle(ProductByIdQuery request, CancellationToken cancellationToken) => unit.ProductRepository.GetAsync(request.Id, cancellationToken);
 
-    Task<IEnumerable<Product>> IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>.Handle(ProductPaginatedQuery request, CancellationToken cancellationToken) => unit.ProductRepository.Get(request, cancellationToken);
+    Task<IEnumerable<Product>> IRequestHandler<ProductPaginatedQuery, IEnumerable<Product>>.Handle(ProductPaginatedQuery request, CancellationToken cancellationToken) => unit.ProductRepository.GetAsync(request, cancellationToken);
 }

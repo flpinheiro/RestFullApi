@@ -2,7 +2,7 @@
 
 namespace RestFull.Domain.Core.Interfaces;
 
-public interface IUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
     IProductRepository  ProductRepository { get; set; }
 

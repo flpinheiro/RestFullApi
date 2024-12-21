@@ -1,0 +1,49 @@
+﻿@page "/products"
+@using RestFull.Domain.Core.Entities
+@using RestFull.Domain.Core.Queries
+@using RestFullApi.Web.Services
+@inject IBFFApiService _service
+
+
+<PageTitle>Products</PageTitle>
+
+<h1>Products</h1>
+
+<MudTable Items="@products"
+          FixedHeader=true
+          FixedFooter=true
+          Height="400px">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Price</MudTh>
+        <MudTh>Quantity</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Price">@context.Price</MudTd>
+        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+    </RowTemplate>
+    @*     <FooterContent>
+        <MudTd>Nr</MudTd>
+        <MudTd>Sign</MudTd>
+        <MudTd>Name</MudTd>
+        <MudTd>Position</MudTd>
+        <MudTd>Molar mass</MudTd>
+    </FooterContent> *@
+    <PagerContent>
+        <MudTablePager PageSizeOptions=@pageSizeOptions />
+    </PagerContent>
+</MudTable>
+
+
+
+@code {
+    private int[] pageSizeOptions = new int[] { 10, 25, 50, 100 };
+    private IEnumerable<Product> products = new List<Product>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var query = new ProductPaginatedQuery();
+        products = await _service.GetProducts(query);
+    }
+}

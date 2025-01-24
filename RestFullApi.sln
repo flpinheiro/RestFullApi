@@ -37,6 +37,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFull.QueryService", "Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infra", "5 - Infra", "{6035E239-FA53-42B0-A1A9-C2B910A76A66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "realms", "realms", "{ECAEF1E5-9856-42A9-A317-9EB0767F98DE}"
+	ProjectSection(SolutionItems) = preProject
+		realms\realm.json = realms\realm.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

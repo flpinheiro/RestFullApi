@@ -8,6 +8,7 @@ var elasticsearch = builder.AddElasticsearch("elasticsearch")
 
 var keycloak = builder.AddKeycloak("keycloak", 8080)
                 .WithDataVolume()
+                .WithRealmImport("../realms")
                 .WithLifetime(ContainerLifetime.Persistent);
 
 var password = builder.AddParameter("password", "Chageme@123", secret: true);
